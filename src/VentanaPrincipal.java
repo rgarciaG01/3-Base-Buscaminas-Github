@@ -28,8 +28,8 @@ public class VentanaPrincipal {
 	
 	//Todos los botones se meten en un panel independiente.
 	//Hacemos esto para que podamos cambiar después los componentes por otros
-	JPanel [][] panelesJuego;
-	JButton [][] botonesJuego;
+	 JPanel [][] panelesJuego;
+	 JButton [][] botonesJuego;
 	
 	//Correspondencia de colores para las minas:
 	Color correspondenciaColores [] = {Color.BLACK, Color.CYAN, Color.GREEN, Color.ORANGE, Color.RED, Color.RED, Color.RED, Color.RED, Color.RED, Color.RED};
@@ -142,7 +142,13 @@ public class VentanaPrincipal {
 	 * Método que inicializa todos los lísteners que necesita inicialmente el programa
 	 */
 	public void inicializarListeners(){
-		//TODO
+		for(int i = 0;i<=juego.LADO_TABLERO-1;i++){
+			for(int j = 0;j<=juego.LADO_TABLERO-1;j++){
+				botonesJuego[i][j].addActionListener(new ActionBoton(this, i, j));
+			}
+		}
+
+		//dar listenes a botones  para que se abran las casillas 
 	}
 	
 	
@@ -160,6 +166,44 @@ public class VentanaPrincipal {
 	 */
 	public void mostrarNumMinasAlrededor(int i , int j) {
 		//TODO
+		String numero;
+		int aux;
+		JLabel jl;
+		numero = ""+juego.getMinasAlrededor(i, j);
+
+			//Seleciona el panel, elimina sus componentes(buscarlo) y añadimos un JLabel centrado y no editable con el numero de minas alrredeor
+		panelesJuego[i][j].remove(botonesJuego[i][j]);
+		jl = new JLabel(numero);
+		aux = Integer.parseInt(numero);
+		jl.setHorizontalAlignment(0);
+
+		switch(aux){
+			case 0:{
+				jl.setForeground(Color.BLACK);
+				break;
+			}
+			case 1:{
+				jl.setForeground(Color.CYAN);
+				break;
+			}
+			case 2:{
+				jl.setForeground(Color.GREEN);
+				break;
+			}
+			case 3:{
+				jl.setForeground(Color.ORANGE);
+				break;
+			}
+			default:{
+				jl.setForeground(Color.RED);
+				break;
+			}
+		}
+
+		panelesJuego[i][j].add(jl);
+			
+
+			
 	}
 	
 	
@@ -169,14 +213,14 @@ public class VentanaPrincipal {
 	 * @post : Todos los botones se desactivan excepto el de volver a iniciar el juego.
 	 */
 	public void mostrarFinJuego(boolean porExplosion) {
-		//TODO
+		
 	}
 
 	/**
 	 * Método que muestra la puntuación por pantalla.
 	 */
 	public void actualizarPuntuacion() {
-		//TODO
+		pantallaPuntuacion.setText(Integer.toString(juego.getPuntuacion()));
 	}
 	
 	/**
