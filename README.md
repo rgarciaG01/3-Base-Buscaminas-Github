@@ -12,7 +12,7 @@ Pasos
 
 3. Una vez has creado un fork de tu repositorio, ábrelo con VSCode en local. 
 
-4. Implementa el buscaminas. No olvides ir haciendo "commits" y "pushs" según vayas avanzando en el desarrollo. Así podrás llevar un seguimiento.
+4.  Implementa el buscaminas. No olvides ir haciendo "commits" y "pushs" según vayas avanzando en el desarrollo. Así podrás llevar un seguimiento.
 
 
 
