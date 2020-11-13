@@ -213,6 +213,21 @@ public class VentanaPrincipal {
 	 * @post : Todos los botones se desactivan excepto el de volver a iniciar el juego.
 	 */
 	public void mostrarFinJuego(boolean porExplosion) {
+		String info = "";
+		for(int i = 0;i<juego.LADO_TABLERO-1;i++){
+			for(int j = 0;j<juego.LADO_TABLERO-1;j++){
+				botonesJuego[i][j].setEnabled(false);
+			}
+		}
+		if(porExplosion){
+			info = "Has perdido, tocaste un mina\n Tu puntuación es de " + pantallaPuntuacion.getText();
+			JOptionPane.showMessageDialog(ventana, info);
+
+		}else{
+			info = "¡¡Muy bien!! has conseguido encontrar todas las minas";
+			JOptionPane.showMessageDialog(ventana, info);
+		}
+
 		
 	}
 
