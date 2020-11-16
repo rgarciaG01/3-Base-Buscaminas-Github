@@ -28,8 +28,13 @@ public class ActionBoton implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		
 		if(ventana.juego.abrirCasilla(i, j)){
+			
 			ventana.mostrarNumMinasAlrededor(i, j);
 			ventana.actualizarPuntuacion();
+			if(ventana.juego.esFinJuego()){
+				ventana.mostrarFinJuego(false);
+			}
+			
 		}else{
 			ventana.mostrarFinJuego(true);
 		}

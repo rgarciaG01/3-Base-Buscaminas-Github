@@ -109,6 +109,12 @@ public class ControlJuego {
 
 		return contador;
 	}
+
+
+
+
+
+
 	
 	/**
 	 * Método que nos permite abrir una casilla, retorna verdadero  y suma un punto si no hay mina 
@@ -134,12 +140,13 @@ public class ControlJuego {
 	public boolean esFinJuego(){
 		boolean finDelJuego = false;
 
-		if(puntuacion == ((LADO_TABLERO*LADO_TABLERO)-MINAS_INICIALES-1)){
+		if(puntuacion == ((LADO_TABLERO*LADO_TABLERO)-MINAS_INICIALES)){
 			finDelJuego = true;
 		}
 
 		return finDelJuego;
 	}
+	
 	
 	
 	/**
@@ -174,5 +181,9 @@ public class ControlJuego {
 	public int getPuntuacion() {
 		return puntuacion;
 	}
+	public void setPuntuación( int num){
+		puntuacion = num;
+	}
+	
 	
 }

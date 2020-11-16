@@ -124,24 +124,60 @@ public class VentanaPrincipal {
 		}
 		
 		//Botones
-		botonesJuego = new JButton[10][10];
-		for (int i = 0; i < botonesJuego.length; i++) {
-			for (int j = 0; j < botonesJuego[i].length; j++) {
-				botonesJuego[i][j] = new JButton("-");
-				panelesJuego[i][j].add(botonesJuego[i][j]);
-			}
-		}
 		
+		this.iniciarBotones();
+
 		//BotónEmpezar:
 		panelEmpezar.add(botonEmpezar);
 		panelPuntuacion.add(pantallaPuntuacion);
+
 		
 	}
 	
 	/**
 	 * Método que inicializa todos los lísteners que necesita inicialmente el programa
 	 */
-	public void inicializarListeners(){
+	public  void iniciarBotones(){
+		botonesJuego = new JButton[10][10];
+		for (int i = 0; i < botonesJuego.length; i++) {
+			for (int j = 0; j < botonesJuego[i].length; j++) {
+				botonesJuego[i][j] = new JButton("-");
+				panelesJuego[i][j].add(botonesJuego[i][j]);
+			
+			}
+		}
+	}
+	public void borrarBotones(){
+		for (int i = 0; i < botonesJuego.length; i++) {
+			for (int j = 0; j < botonesJuego[i].length; j++) {
+				panelesJuego[i][j].removeAll();
+			}
+		}
+	}
+	
+	public void iniciarListenersDeGO(){
+		botonEmpezar.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				juego.setPuntuación(0);
+				actualizarPuntuacion();
+				borrarBotones();
+				iniciarBotones();
+				inicializarListeners();
+				juego.inicializarPartida();
+				refrescarPantalla();
+				juego.depurarTablero();
+
+
+				
+				
+			}
+		});
+	}
+	
+
+
+	 public void inicializarListeners(){
 		for(int i = 0;i<=juego.LADO_TABLERO-1;i++){
 			for(int j = 0;j<=juego.LADO_TABLERO-1;j++){
 				botonesJuego[i][j].addActionListener(new ActionBoton(this, i, j));
@@ -149,6 +185,8 @@ public class VentanaPrincipal {
 		}
 
 		//dar listenes a botones  para que se abran las casillas 
+
+	
 	}
 	
 	
@@ -213,9 +251,10 @@ public class VentanaPrincipal {
 	 * @post : Todos los botones se desactivan excepto el de volver a iniciar el juego.
 	 */
 	public void mostrarFinJuego(boolean porExplosion) {
+
 		String info = "";
-		for(int i = 0;i<juego.LADO_TABLERO-1;i++){
-			for(int j = 0;j<juego.LADO_TABLERO-1;j++){
+		for(int i = 0;i<juego.LADO_TABLERO;i++){
+			for(int j = 0;j<juego.LADO_TABLERO;j++){
 				botonesJuego[i][j].setEnabled(false);
 			}
 		}
@@ -261,7 +300,8 @@ public class VentanaPrincipal {
 		//IMPORTANTE, PRIMERO HACEMOS LA VENTANA VISIBLE Y LUEGO INICIALIZAMOS LOS COMPONENTES.
 		ventana.setVisible(true);
 		inicializarComponentes();	
-		inicializarListeners();		
+		inicializarListeners();
+		iniciarListenersDeGO();		
 	}
 
 
