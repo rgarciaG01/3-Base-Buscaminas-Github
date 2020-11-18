@@ -13,9 +13,16 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-/**
- * Ventana principal del Buscaminas
- * @author {Rellenar por el alumno}
+/** * @author Ricardo Martín García
+
+ * La clase VentanaPrincipal es la encargada de realizar las tareas en cuando gráficos se refire, es decir nos muestra 
+ * las ventanas, mensajes , botones etc...
+ * Ademas de eso se encarga de poner a escuchar todos los botones tantos los del tablero como el del reiniciar el juego
+ * y es encargada de actualizar la puntuación del juego(en el panel), tambien es encargada de refrescar la pantalla y tiene una
+ * instancia del ControlJuego(ver descripción de ControlJuego )
+ * @see ControlJuego
+ * @version 1.0
+ * @since 1.0
  */
 public class VentanaPrincipal {
 
@@ -31,9 +38,7 @@ public class VentanaPrincipal {
 	 JPanel [][] panelesJuego;
 	 JButton [][] botonesJuego;
 	
-	//Correspondencia de colores para las minas:
-	Color correspondenciaColores [] = {Color.BLACK, Color.CYAN, Color.GREEN, Color.ORANGE, Color.RED, Color.RED, Color.RED, Color.RED, Color.RED, Color.RED};
-	
+
 	JButton botonEmpezar;
 	JTextField pantallaPuntuacion;
 	
@@ -123,7 +128,7 @@ public class VentanaPrincipal {
 			}
 		}
 		
-		//Botones
+		//Inicializamos los botones en un método aparte , esto nos simplificará el volver a caragr otra partida 
 		
 		this.iniciarBotones();
 
@@ -134,9 +139,7 @@ public class VentanaPrincipal {
 		
 	}
 	
-	/**
-	 * Método que inicializa todos los lísteners que necesita inicialmente el programa
-	 */
+
 	public  void iniciarBotones(){
 		botonesJuego = new JButton[10][10];
 		for (int i = 0; i < botonesJuego.length; i++) {
@@ -154,12 +157,15 @@ public class VentanaPrincipal {
 			}
 		}
 	}
+	/**
+	 * Metodo que pone el listener el botón de "Go", reiniciando la partida
+	 */
 	
 	public void iniciarListenersDeGO(){
 		botonEmpezar.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				juego.setPuntuación(0);
+				juego.setPuntuacion(0);
 				actualizarPuntuacion();
 				borrarBotones();
 				iniciarBotones();
@@ -175,7 +181,9 @@ public class VentanaPrincipal {
 		});
 	}
 	
-
+	/**
+	 * Método que inicializa todos los lísteners que necesita inicialmente el programa
+	 */
 
 	 public void inicializarListeners(){
 		for(int i = 0;i<=juego.LADO_TABLERO-1;i++){
@@ -209,7 +217,6 @@ public class VentanaPrincipal {
 		JLabel jl;
 		numero = ""+juego.getMinasAlrededor(i, j);
 
-			//Seleciona el panel, elimina sus componentes(buscarlo) y añadimos un JLabel centrado y no editable con el numero de minas alrredeor
 		panelesJuego[i][j].remove(botonesJuego[i][j]);
 		jl = new JLabel(numero);
 		aux = Integer.parseInt(numero);
@@ -259,7 +266,7 @@ public class VentanaPrincipal {
 			}
 		}
 		if(porExplosion){
-			info = "Has perdido, tocaste un mina\n Tu puntuación es de " + pantallaPuntuacion.getText();
+			info = "Has perdido, tocaste un mina\n  Has conseguido " + pantallaPuntuacion.getText()+  " puntos";
 			JOptionPane.showMessageDialog(ventana, info);
 
 		}else{
@@ -297,7 +304,6 @@ public class VentanaPrincipal {
 	 * Método para inicializar el programa
 	 */
 	public void inicializar(){
-		//IMPORTANTE, PRIMERO HACEMOS LA VENTANA VISIBLE Y LUEGO INICIALIZAMOS LOS COMPONENTES.
 		ventana.setVisible(true);
 		inicializarComponentes();	
 		inicializarListeners();

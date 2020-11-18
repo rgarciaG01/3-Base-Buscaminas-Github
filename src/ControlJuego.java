@@ -7,7 +7,7 @@ import java.util.Random;
  * Si hay una mina en una posición guarda el número -1
  * Si no hay una mina, se guarda cuántas minas hay alrededor.
  * Almacena la puntuación de la partida
- * @author jesusredondogarcia
+ * @author Ricardo Martín García
  *
  */
 public class ControlJuego {
@@ -181,7 +181,7 @@ public class ControlJuego {
 	public int getPuntuacion() {
 		return puntuacion;
 	}
-	public void setPuntuación( int num){
+	public void setPuntuacion( int num){
 		puntuacion = num;
 	}
 	
