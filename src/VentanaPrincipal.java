@@ -78,7 +78,7 @@ public class VentanaPrincipal {
 		panelJuego = new JPanel();
 		panelJuego.setLayout(new GridLayout(juego.LADO_TABLERO, juego.LADO_TABLERO));
 
-		botonEmpezar = new JButton("REINICIAR BUSQUEDA");
+		botonEmpezar = new JButton("REINICIAR TABLERO");
 		pantallaPuntuacion = new JTextField("0");
 		pantallaPuntuacion.setEditable(false);
 		pantallaPuntuacion.setHorizontalAlignment(SwingConstants.CENTER);
@@ -297,7 +297,7 @@ public class VentanaPrincipal {
 	 *       juego.
 	 */
 	public void mostrarFinJuego(boolean porExplosion) {
-		
+
 		String info = "";
 		for (int i = 0; i < juego.LADO_TABLERO; i++) {
 			for (int j = 0; j < juego.LADO_TABLERO; j++) {
@@ -306,13 +306,13 @@ public class VentanaPrincipal {
 		}
 		if (porExplosion) {
 			ImageIcon im = new ImageIcon("explosion.jpg");
-		jlimagen.setIcon(im);
+			jlimagen.setIcon(im);
 			info = "Has perdido, tocaste un mina\n  Has conseguido " + pantallaPuntuacion.getText() + " puntos";
 			JOptionPane.showMessageDialog(ventana, info);
 
 		} else {
 			ImageIcon im = new ImageIcon("bien.jpg");
-		jlimagen.setIcon(im);
+			jlimagen.setIcon(im);
 			info = "¡¡Muy bien!! has conseguido encontrar todas las minas";
 			JOptionPane.showMessageDialog(ventana, info);
 		}

@@ -41,6 +41,7 @@ public class SelectorDificultad extends JDialog {
 
     }
 
+    // Añade los elementos a la pestaña
     private void anadirElementos() {
 
         this.setLayout(new GridBagLayout());
@@ -109,6 +110,7 @@ public class SelectorDificultad extends JDialog {
                 }
 
                 EventQueue.invokeLater(new Runnable() {
+                    // Inicia la partida nueva... con la dificultad que hemos puesto
                     public void run() {
                         try {
                             VentanaPrincipal vp = new VentanaPrincipal(LADO);

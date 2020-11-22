@@ -9,7 +9,7 @@ import java.awt.EventQueue;
 public class Principal {
 
 	/**
-	 * Método main
+	 * Método main, es el método principal y su función es llamar al JDialog
 	 * 
 	 * @param args : Cadenas de parámetros del main
 	 */
