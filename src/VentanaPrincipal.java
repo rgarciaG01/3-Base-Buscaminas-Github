@@ -297,8 +297,7 @@ public class VentanaPrincipal {
 	 *       juego.
 	 */
 	public void mostrarFinJuego(boolean porExplosion) {
-		ImageIcon im = new ImageIcon("explosion.jpg");
-		jlimagen.setIcon(im);
+		
 		String info = "";
 		for (int i = 0; i < juego.LADO_TABLERO; i++) {
 			for (int j = 0; j < juego.LADO_TABLERO; j++) {
@@ -306,10 +305,14 @@ public class VentanaPrincipal {
 			}
 		}
 		if (porExplosion) {
+			ImageIcon im = new ImageIcon("explosion.jpg");
+		jlimagen.setIcon(im);
 			info = "Has perdido, tocaste un mina\n  Has conseguido " + pantallaPuntuacion.getText() + " puntos";
 			JOptionPane.showMessageDialog(ventana, info);
 
 		} else {
+			ImageIcon im = new ImageIcon("bien.jpg");
+		jlimagen.setIcon(im);
 			info = "¡¡Muy bien!! has conseguido encontrar todas las minas";
 			JOptionPane.showMessageDialog(ventana, info);
 		}

@@ -148,12 +148,12 @@ public class ControlJuego {
 	 * Método que pinta por pantalla toda la información del tablero, se utiliza
 	 * para depurar
 	 */
-	/*
-	 * public void depurarTablero(){
-	 * System.out.println("---------TABLERO--------------"); for (int i = 0; i <
-	 * tablero.length; i++) { for (int j = 0; j < tablero[i].length; j++) {
-	 * System.out.print(tablero[i][j]+"\t"); } System.out.println(); }
-	 * System.out.println("\nPuntuación: "+puntuacion); }
+/* 	
+	  public void depurarTablero(){
+	  System.out.println("---------TABLERO--------------"); for (int i = 0; i <
+	  tablero.length; i++) { for (int j = 0; j < tablero[i].length; j++) {
+	  System.out.print(tablero[i][j]+"\t"); } System.out.println(); }
+	  System.out.println("\nPuntuación: "+puntuacion); }
 	 */
 
 	/**
