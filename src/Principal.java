@@ -2,13 +2,15 @@ import java.awt.EventQueue;
 
 /**
  * Clase principal del Buscaminas
- * @author  Ricardo Martín García
+ * 
+ * @author Ricardo Martín García
  *
  */
 public class Principal {
 
 	/**
 	 * Método main
+	 * 
 	 * @param args : Cadenas de parámetros del main
 	 */
 	public static void main(String[] args) {
@@ -16,7 +18,7 @@ public class Principal {
 			public void run() {
 				try {
 					SelectorDificultad selector = new SelectorDificultad();
-            selector.setVisible(true);
+					selector.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -1,17 +1,11 @@
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import java.awt.Insets;
 import javax.swing.JSlider;
 
-import javax.swing.event.*;
-
-import java.applet.*;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.color.*;
 
 import java.awt.*;
 
@@ -19,6 +13,14 @@ import java.awt.GridBagLayout;
 import java.util.Hashtable;
 import java.awt.GridBagConstraints;
 
+/**
+ * Esta clase ejecuta una pequeña ventana de selección de dificultad, una vez
+ * elegida arranca el juego con los parametros dichos por el usuario
+ * 
+ * @author Ricardo Martín García
+ * 
+ * 
+ */
 public class SelectorDificultad extends JDialog {
     JSlider barraDificulta;
 
@@ -29,14 +31,17 @@ public class SelectorDificultad extends JDialog {
 
     public SelectorDificultad() {
         super();
-        setModal(true);
-        setBounds(0, 0, 250, 300);
-        añadirElementos();
+        Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
+        int height = pantalla.height;
+        int width = pantalla.width;
+        setBounds((width / 2) - (250 / 2), (height / 2) - (300 / 2), 250, 300);
+        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        anadirElementos();
         ponerListeners();
 
     }
 
-    private void añadirElementos() {
+    private void anadirElementos() {
 
         this.setLayout(new GridBagLayout());
         GridBagConstraints ajustes = new GridBagConstraints();
@@ -46,7 +51,6 @@ public class SelectorDificultad extends JDialog {
         ajustes.insets = new Insets(0, 0, 50, 0);
 
         this.add(new JLabel("Selecciona La dificultad: "), ajustes);
-
 
         ajustes.gridy = 2;
         ajustes.insets = new Insets(0, 0, 0, 0);
@@ -61,7 +65,6 @@ public class SelectorDificultad extends JDialog {
         labelTable.put(2, new JLabel("Dificil  "));
         labelTable.put(3, new JLabel("PRO"));
 
-
         barraDificulta.setLabelTable(labelTable);
         barraDificulta.setPaintLabels(true);
         barraDificulta.setMinorTickSpacing(100);
@@ -73,31 +76,32 @@ public class SelectorDificultad extends JDialog {
         ajustes.gridy = 2;
         ajustes.fill = GridBagConstraints.NONE;
         ajustes.ipady = 0;
-        ajustes.insets = new Insets(50,0,0,0);
+        ajustes.insets = new Insets(50, 0, 0, 0);
         aceptar = new JButton("JUGAR");
         this.add(aceptar, ajustes);
 
     }
 
+    // Pone el listener al botón
     private void ponerListeners() {
         aceptar.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                switch(barraDificulta.getValue()){
-                    case 0:{
+                switch (barraDificulta.getValue()) {
+                    case 0: {
                         LADO = 5;
-                    break;
+                        break;
                     }
-                    case 1:{
+                    case 1: {
                         LADO = 10;
                         break;
                     }
-                    case 2:{
+                    case 2: {
                         LADO = 15;
                         break;
                     }
-                    case 3:{
+                    case 3: {
                         LADO = 20;
                         break;
                     }
@@ -114,7 +118,7 @@ public class SelectorDificultad extends JDialog {
                         }
                     }
                 });
-                
+
                 dispose();
 
             }
@@ -122,7 +126,5 @@ public class SelectorDificultad extends JDialog {
         });
 
     }
-
- 
 
 }

@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import java.awt.*;
+
 /**
  * * @author Ricardo Martín García
  * 
@@ -23,7 +25,7 @@ import javax.swing.SwingConstants;
  * los del tablero como el del reiniciar el juego y es encargada de actualizar
  * la puntuación del juego(en el panel), tambien es encargada de refrescar la
  * pantalla y tiene una instancia del ControlJuego(ver descripción de
- * ControlJuego )
+ * ControlJuego ) Método que empieza el juego ...@link inicializar
  * 
  * @see ControlJuego
  * @version 1.0
@@ -37,7 +39,7 @@ public class VentanaPrincipal {
 	JPanel panelEmpezar;
 	JPanel panelPuntuacion;
 	JPanel panelJuego;
-
+	JLabel jlimagen;
 	// Todos los botones se meten en un panel independiente.
 	// Hacemos esto para que podamos cambiar después los componentes por otros
 	JPanel[][] panelesJuego;
@@ -52,7 +54,11 @@ public class VentanaPrincipal {
 	// Constructor, marca el tamaño y el cierre del frame
 	public VentanaPrincipal(int lado) {
 		ventana = new JFrame();
-		ventana.setBounds(100, 100, 700, 500);
+
+		Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
+		int height = pantalla.height;
+		int width = pantalla.width;
+		ventana.setBounds((width / 2) - (width / 2), (height / 2) - (height / 2), width, height);
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		juego = new ControlJuego(lado);
 	}
@@ -72,7 +78,7 @@ public class VentanaPrincipal {
 		panelJuego = new JPanel();
 		panelJuego.setLayout(new GridLayout(juego.LADO_TABLERO, juego.LADO_TABLERO));
 
-		botonEmpezar = new JButton("Go!");
+		botonEmpezar = new JButton("REINICIAR BUSQUEDA");
 		pantallaPuntuacion = new JTextField("0");
 		pantallaPuntuacion.setEditable(false);
 		pantallaPuntuacion.setHorizontalAlignment(SwingConstants.CENTER);
@@ -84,15 +90,21 @@ public class VentanaPrincipal {
 		panelJuego.setBorder(BorderFactory.createTitledBorder("Juego"));
 
 		// Colocamos los componentes:
-		// AZUL
+		// PanelImagen
 		GridBagConstraints settings = new GridBagConstraints();
 		settings.gridx = 0;
 		settings.gridy = 0;
 		settings.weightx = 1;
 		settings.weighty = 1;
 		settings.fill = GridBagConstraints.BOTH;
+		ImageIcon im = new ImageIcon("portada.jpg");
+		jlimagen = new JLabel();
+		jlimagen.setIcon(im);
+		panelImagen.setLayout(new GridBagLayout());
+		panelImagen.add(jlimagen);
+
 		ventana.add(panelImagen, settings);
-		// VERDE
+		// Panel Botón
 		settings = new GridBagConstraints();
 		settings.gridx = 1;
 		settings.gridy = 0;
@@ -100,7 +112,7 @@ public class VentanaPrincipal {
 		settings.weighty = 1;
 		settings.fill = GridBagConstraints.BOTH;
 		ventana.add(panelEmpezar, settings);
-		// AMARILLO
+		// Panel Puntuación
 		settings = new GridBagConstraints();
 		settings.gridx = 2;
 		settings.gridy = 0;
@@ -108,7 +120,7 @@ public class VentanaPrincipal {
 		settings.weighty = 1;
 		settings.fill = GridBagConstraints.BOTH;
 		ventana.add(panelPuntuacion, settings);
-		// ROJO
+		// Panel Juego
 		settings = new GridBagConstraints();
 		settings.gridx = 0;
 		settings.gridy = 1;
@@ -140,7 +152,6 @@ public class VentanaPrincipal {
 	}
 
 	public void iniciarBotones() {
-		ImageIcon icono = new ImageIcon("c.PNG");
 
 		botonesJuego = new JButton[juego.LADO_TABLERO][juego.LADO_TABLERO];
 		for (int i = 0; i < botonesJuego.length; i++) {
@@ -152,9 +163,17 @@ public class VentanaPrincipal {
 		}
 	}
 
+	// Método que en caso de tocar una mina nos enseña donde estan todas
 	public void ponerImagenesDeMinas() {
+		ImageIcon icono;
+		// Comprobamos que si estamos en el nivel PRO, ya que si ponemos la misma imagen
+		// el tablero se descoloca demasiado
+		icono = new ImageIcon("iconoMina.PNG");
 
-		ImageIcon icono = new ImageIcon("iconoMina.PNG");
+		if (juego.LADO_TABLERO == 20) {
+			icono = new ImageIcon("iconoMinaPRO.PNG");
+
+		}
 
 		for (int i = 0; i < botonesJuego.length; i++) {
 			for (int j = 0; j < botonesJuego[i].length; j++) {
@@ -169,6 +188,8 @@ public class VentanaPrincipal {
 
 	}
 
+	// Borra todos los botones, esto nos simplificara mucho el volver a reiniciar la
+	// partida
 	public void borrarBotones() {
 		for (int i = 0; i < botonesJuego.length; i++) {
 			for (int j = 0; j < botonesJuego[i].length; j++) {
@@ -178,15 +199,19 @@ public class VentanaPrincipal {
 	}
 
 	/**
-	 * Metodo que pone el listener el botón de "Go", reiniciando la partida
+	 * Metodo que pone el listener el botón de "REINICIAR BUSQUEDA", reiniciando la
+	 * partida
 	 */
 
 	public void iniciarListenersDeGO() {
 		botonEmpezar.addActionListener(new ActionListener() {
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				juego.setPuntuacion(0);
 				actualizarPuntuacion();
+				ImageIcon im = new ImageIcon("portada.jpg");
+				jlimagen.setIcon(im);
 				borrarBotones();
 				iniciarBotones();
 				inicializarListeners();
@@ -272,7 +297,8 @@ public class VentanaPrincipal {
 	 *       juego.
 	 */
 	public void mostrarFinJuego(boolean porExplosion) {
-
+		ImageIcon im = new ImageIcon("explosion.jpg");
+		jlimagen.setIcon(im);
 		String info = "";
 		for (int i = 0; i < juego.LADO_TABLERO; i++) {
 			for (int j = 0; j < juego.LADO_TABLERO; j++) {
