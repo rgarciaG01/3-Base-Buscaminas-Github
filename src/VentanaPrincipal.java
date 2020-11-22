@@ -67,6 +67,7 @@ public class VentanaPrincipal {
 	public void inicializarComponentes() {
 
 		// Definimos el layout:
+		
 		ventana.setLayout(new GridBagLayout());
 
 		// Inicializamos componentes
