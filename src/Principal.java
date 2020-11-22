@@ -15,8 +15,8 @@ public class Principal {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaPrincipal ventana = new VentanaPrincipal();
-					ventana.inicializar();
+					SelectorDificultad selector = new SelectorDificultad();
+            selector.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

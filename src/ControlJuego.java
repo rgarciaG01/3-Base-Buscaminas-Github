@@ -11,21 +11,23 @@ import java.util.Random;
  *
  */
 public class ControlJuego {
-	private final static int MINA = -1;
-	final int MINAS_INICIALES = 20;
-	final int LADO_TABLERO = 10;
+	 final static int MINA = -1;
+	final int LADO_TABLERO ;
+	final int MINAS_INICIALES;
+
 
 	private int [][] tablero;
 	private int puntuacion;
 	
 	
-	public ControlJuego() {
+	public ControlJuego(int lado) {
 		//Creamos el tablero:
+		LADO_TABLERO =lado;
+		MINAS_INICIALES =((LADO_TABLERO*LADO_TABLERO)/2)/2;
 		tablero = new int[LADO_TABLERO][LADO_TABLERO];
 		
 		//Inicializamos una nueva partida
 		inicializarPartida();
-		depurarTablero();
 	}
 	
 	
@@ -55,7 +57,6 @@ public class ControlJuego {
 			}
 		}
 
-		
 		
 		
 		
@@ -152,7 +153,7 @@ public class ControlJuego {
 	/**
 	 * Método que pinta por pantalla toda la información del tablero, se utiliza para depurar
 	 */
-	public void depurarTablero(){
+/* 	 public void depurarTablero(){
 		System.out.println("---------TABLERO--------------");
 		for (int i = 0; i < tablero.length; i++) {
 			for (int j = 0; j < tablero[i].length; j++) {
@@ -161,7 +162,7 @@ public class ControlJuego {
 			System.out.println();
 		}
 		System.out.println("\nPuntuación: "+puntuacion);
-	}
+	}  */
 
 	/**
 	 * Método que se utiliza para obtener las minas que hay alrededor de una celda

@@ -28,7 +28,6 @@ public class ActionBoton implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		//Si abrircasilla() nos retorna true significa que no hay mina,  por lo que muestra las minas alrrededor,actualiza la puntuación y si a terminado el juego (por que ya a conseguido los 80 puntos) se muestra el final del juego  
 		if(ventana.juego.abrirCasilla(i, j)){
-			
 			ventana.mostrarNumMinasAlrededor(i, j);
 			ventana.actualizarPuntuacion();
 			if(ventana.juego.esFinJuego()){
@@ -36,6 +35,7 @@ public class ActionBoton implements ActionListener{
 			}
 			//En caso de que nos retorne false significa que hay una mina y se muestra un mensaje de fin dle juego (por explosión)
 		}else{
+			ventana.ponerImagenesDeMinas();
 			ventana.mostrarFinJuego(true);
 		}
 		//Es importante refrecar la pantalla...
